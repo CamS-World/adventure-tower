@@ -1,16 +1,3 @@
-public class Class extends Player{
-    @Override
-    public void attack() {
+public class Class {
 
-    }
-
-    @Override
-    public void heal() {
-
-    }
-
-    @Override
-    public void harm() {
-
-    }
 }

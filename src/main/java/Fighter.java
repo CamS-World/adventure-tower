@@ -1,8 +1,8 @@
 import java.util.Random;
 
-public class Fighter extends Class  {
+public class Fighter extends Player  {
 
-    @Override
+
     public void attack(Player player){
     int fighterAttackScore = player.getAttackScore();
     int proficiency = player.getProwessScore();
@@ -11,6 +11,14 @@ public class Fighter extends Class  {
     int d20 = ran.nextInt(20);
 
     int attackRoll = fighterAttackScore + proficiency + d20;
+
+    }
+
+    public void heal(){
+
+    }
+
+    public void harm(){
 
     }
 }
