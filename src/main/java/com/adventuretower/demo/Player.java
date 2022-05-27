@@ -1,6 +1,14 @@
+package com.adventuretower.demo;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public abstract class Player {
 
-
+    @GeneratedValue
+    @Id
     private int playerId;
     private String playerName;
     private int playerHp;
