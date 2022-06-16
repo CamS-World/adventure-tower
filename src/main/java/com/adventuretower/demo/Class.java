@@ -1,4 +1,4 @@
-package com.adventuretower.demo;
-
-public class Class {
-}
+//package com.adventuretower.demo;
+//
+//public interface Class {
+//}
