@@ -12,13 +12,15 @@ public abstract class Player {
     private int playerId;
     private String playerName;
     private int playerHp;
-    private int bodyScore;
-    private int mindScore;
-    private int spirtScore;
+    private int strength;
+    private int agility;
+    private int intelligence;
+    private int constitution;
+    private int mana;
     private int attackScore;
     private int defenseScore;
-    private int prowessScore;
-    private Class playerClass;
+    private int proficiency;
+
 
     public int getPlayerId() {
         return playerId;
@@ -32,16 +34,20 @@ public abstract class Player {
         return playerHp;
     }
 
-    public int getBodyScore() {
-        return bodyScore;
+    public int getStrength() {
+        return strength;
     }
 
-    public int getMindScore() {
-        return mindScore;
+    public int getAgility() { return agility;}
+
+    public int getIntelligence() {
+        return intelligence;
     }
 
-    public int getSpirtScore() {
-        return spirtScore;
+    public int getConstitution() {return constitution;}
+
+    public int getMana() {
+        return mana;
     }
 
     public int getAttackScore() {
@@ -52,30 +58,31 @@ public abstract class Player {
         return defenseScore;
     }
 
-    public int getProwessScore() {
-        return prowessScore;
+    public int getProficiency() {
+        return proficiency;
     }
 
-    public Class getPlayerClass() {
-        return playerClass;
-    }
 
-    public Player(String playerName, int playerHp, int bodyScore, int mindScore, int spirtScore, int attackScore, int defenseScore, Class playerClass) {
+
+    public Player(String playerName, int playerHp, int strength, int agility, int intelligence, int constitution, int attackScore, int defenseScore, int proficiency ) {
         this.playerName = playerName;
         this.playerHp = playerHp;
-        this.bodyScore = bodyScore;
-        this.mindScore = mindScore;
-        this.spirtScore = spirtScore;
+        this.strength = strength;
+        this.agility = agility;
+        this.intelligence = intelligence;
+        this.constitution = constitution;
+        this.mana = constitution;
         this.attackScore = attackScore;
         this.defenseScore = defenseScore;
-        this.playerClass = playerClass;
+        this.proficiency = proficiency;
+
     }
 
     public Player(){
     }
 
 
-    public abstract void attack(Player player);
+    public abstract int attack();
 
     public abstract void heal();
 
