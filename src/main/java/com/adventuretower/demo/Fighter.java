@@ -2,8 +2,9 @@ package com.adventuretower.demo;
 
 import java.util.Random;
 
-public class Fighter extends Player  {
+public class Fighter extends FighterMoves {
 
+    private String name;
     private int playerHP;
     private int strength;
     private int intelligence;
@@ -19,17 +20,17 @@ public class Fighter extends Player  {
         return playerHP;
     }
 
-    @Override
+
     public int getStrength() {
         return strength;
     }
 
-    @Override
+
     public int getIntelligence() {
         return intelligence;
     }
 
-    @Override
+
     public int getMana() {
         return mana;
     }
@@ -47,39 +48,47 @@ public class Fighter extends Player  {
     }
 
 
-    @Override
+
     public int getProficiency() {
         return proficiency;
     }
 
 
-    public Fighter(int playerHP, int strength, int intelligence, int mana, int attack, int defense, int level, int proficiency){
+
+
+    public Fighter(String name, int playerHP, int strength, int intelligence, int mana,  int defense, int level, int proficiency){
+        this.name = name;
         this.playerHP = playerHP;
         this.strength = strength;
         this.intelligence = intelligence;
         this.mana = mana;
-        this.attack = attack;
+        this.attack = strength + proficiency;
         this.defense = defense;
         this.level = level;
         this.proficiency = proficiency;
     }
 
 
+        public Fighter(){
+
+    };
+
     //Player methods
-    @Override
+
     public int attack(){
 //        int fighterAttackScore = player.getAttackScore();
 //        int proficiency = player.getProficiency();
 
         Random ran = new Random();
         int d20 = ran.nextInt(20);
+
         System.out.println("Dice roll: " + d20);
 
         if (d20==20) {
             System.out.println("Crit Hit!");
         }
 
-        attack = strength + proficiency;
+        attack = proficiency + strength;
         System.out.println("attack mod: " +attack);
 
         int attackRoll = attack + d20;
@@ -87,12 +96,12 @@ public class Fighter extends Player  {
 
     }
 
-    @Override
+
     public void heal(){
 
     }
 
-    @Override
+
     public void harm(){
 
     }
