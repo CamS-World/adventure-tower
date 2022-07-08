@@ -76,29 +76,30 @@ public class Fighter extends FighterMoves {
     //Player methods
 
     public boolean attack(Fiend fiend){
-//        int fighterAttackScore = player.getAttackScore();
-//        int proficiency = player.getProficiency();
 
-        Random ran = new Random();
-        int d20 = ran.nextInt(20);
+        int min = 1;
+        int max = 20;
+        int range = max - min + 1;
 
-        System.out.println("Dice roll D20: " + d20);
+
+        int d20 = (int) ((Math.random() * range) + min);
+
 
         if (d20==20) {
             System.out.println("Crit Hit!");
         }
 
-        if (d20 <= 1){
+        if (d20 == 1){
             System.out.println("Crit failure!");
         }
 
 
 
         attack = proficiency + strength;
-        System.out.println("attack mod: " +attack);
+//        System.out.println("attack mod: " +attack);
 
         int attackRoll = attack + d20;
-        System.out.println("Total attack roll: " + attackRoll);
+        System.out.println("Total attack roll: " + attackRoll + " (Roll: " + d20 + " Modifier: " + attack + ")");
 
         if (attackRoll > fiend.getDefense()){
             return true;

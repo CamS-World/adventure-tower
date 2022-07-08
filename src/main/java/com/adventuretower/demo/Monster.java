@@ -18,7 +18,11 @@ class Fiend {
     private String monsterTitle;
     private int monsterHp;
     private int defense;
+    private int attack;
     private int experiencePoints;
+    private int strength;
+    private int intelligence;
+    private int mana;
     private Collection<String> resistances;
     private Collection<String> damageTypes;
 
@@ -34,9 +38,17 @@ class Fiend {
         return defense;
     }
 
+    public int getAttack() {return attack;}
+
     public int getExperiencePoints() {
         return experiencePoints;
     }
+
+    public int getStrength() {return strength;}
+
+    public int getIntelligence() {return intelligence;}
+
+    public int getMana() {return mana;}
 
     public Collection<String> getResistances() {
         return resistances;
@@ -50,10 +62,14 @@ class Fiend {
         this.monsterHp = monsterHp;
     }
 
-    public Fiend(String monsterTitle, int monsterHp, int defense, int experiencePoints, String...resistances){
+    public Fiend(String monsterTitle, int monsterHp, int defense, int strength, int intelligence, int mana  ,int experiencePoints, String...resistances){
         this.monsterTitle = monsterTitle;
         this.monsterHp = monsterHp;
         this.defense = defense;
+        this.attack = attack;
+        this.strength = strength;
+        this.intelligence = intelligence;
+        this.mana = mana;
         this.experiencePoints = experiencePoints;
         this.resistances=new ArrayList<>(Arrays.asList(resistances));
     }
