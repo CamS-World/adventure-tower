@@ -7,6 +7,7 @@ public class Fighter extends FighterMoves {
     private String name;
     private int playerHP;
     private int strength;
+    private int agility;
     private int intelligence;
     private int mana;
     private int attack;
@@ -16,6 +17,8 @@ public class Fighter extends FighterMoves {
 
 
     // Getters
+    public String getName(){return name;}
+
     public int getPlayerHP() {
         return playerHP;
     }
@@ -23,6 +26,10 @@ public class Fighter extends FighterMoves {
 
     public int getStrength() {
         return strength;
+    }
+
+    public int getAgility() {
+        return agility;
     }
 
 
@@ -54,12 +61,15 @@ public class Fighter extends FighterMoves {
     }
 
 
+    public void setPlayerHP(int playerHP) {
+        this.playerHP = playerHP;
+    }
 
-
-    public Fighter(String name, int playerHP, int strength, int intelligence, int mana,  int defense, int level, int proficiency){
+    public Fighter(String name, int playerHP, int strength, int agility, int intelligence, int mana, int defense, int level, int proficiency){
         this.name = name;
         this.playerHP = playerHP;
         this.strength = strength;
+        this.agility = agility;
         this.intelligence = intelligence;
         this.mana = mana;
         this.attack = strength + proficiency;
@@ -74,6 +84,18 @@ public class Fighter extends FighterMoves {
     };
 
     //Player methods
+
+    public int initiative(){
+        int min = 1;
+        int max = 20;
+        int range = max - min + 1;
+
+
+        int d20 = (int) ((Math.random() * range) + min);
+
+        int initiative = d20 + agility;
+        return initiative;
+    }
 
     public boolean attack(Fiend fiend){
 
@@ -114,7 +136,7 @@ public class Fighter extends FighterMoves {
     }
 
 
-    public void harm(){
-
+    public void harm(Fighter fighter, int damageDone){
+    playerHP -= damageDone;
     }
 }

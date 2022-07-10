@@ -7,6 +7,7 @@ public abstract class FighterMoves {
     int slashAttack(Fighter fighter, Fiend fiend){
         if (fighter.attack(fiend) == false){
             System.out.println("Attack missed!");
+            System.out.println("Monster HP: "+ fiend.getMonsterHp());
             return fiend.getMonsterHp();
         }
         System.out.println("Attack Hit! Roll for damage.");
@@ -21,8 +22,10 @@ public abstract class FighterMoves {
         System.out.println("Damage amount: " + damage + " Dice roll: " + d8 + " damage modifier: " + fighter.getStrength());
 
         fiend.setMonsterHp(fiend.getMonsterHp() - damage);
-        System.out.println();
-        System.out.println("monster's new health: ");
+        if (fiend.getMonsterHp()<0){
+            fiend.setMonsterHp(0);
+        }
+        System.out.println("monster's new health: " + fiend.getMonsterHp());
         return fiend.getMonsterHp();
     };
 
@@ -44,12 +47,15 @@ public abstract class FighterMoves {
 
         //Fail scenario
         if (strengthSave < difficultyScore){
-            System.out.println("save: "+strengthSave);
+            System.out.println("Monster save: "+strengthSave);
             System.out.println("DC: "+difficultyScore);
             System.out.println("fiend initial health: " +fiend.getMonsterHp());
             fiend.setMonsterHp(fiend.getMonsterHp() - twoD6);
             System.out.println("2d6: " +twoD6);
-            System.out.println("Strength save failed: " + fiend.getMonsterHp());
+            if (fiend.getMonsterHp()<0){
+                fiend.setMonsterHp(0);
+            }
+            System.out.println("Strength save failed. Monster hp: " + fiend.getMonsterHp());
 
         }
     //Success scenario
@@ -60,8 +66,11 @@ public abstract class FighterMoves {
             System.out.println("save: " + strengthSave);
             System.out.println("DC: " + difficultyScore);
 
+            if (fiend.getMonsterHp()<0){
+                fiend.setMonsterHp(0);
+            }
 
-            System.out.println("Strength save success: " + fiend.getMonsterHp());
+            System.out.println("Strength save success. Half damage! Monster hp: " + fiend.getMonsterHp());
         }
 
     };
