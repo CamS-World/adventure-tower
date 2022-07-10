@@ -21,8 +21,10 @@ class Fiend {
     private int attack;
     private int experiencePoints;
     private int strength;
+    private int agility;
     private int intelligence;
     private int mana;
+    private int proficiency;
     private Collection<String> resistances;
     private Collection<String> damageTypes;
 
@@ -46,9 +48,15 @@ class Fiend {
 
     public int getStrength() {return strength;}
 
+    public int getAgility() {return agility;}
+
     public int getIntelligence() {return intelligence;}
 
     public int getMana() {return mana;}
+
+    public int getProficiency() {
+        return proficiency;
+    }
 
     public Collection<String> getResistances() {
         return resistances;
@@ -62,7 +70,9 @@ class Fiend {
         this.monsterHp = monsterHp;
     }
 
-    public Fiend(String monsterTitle, int monsterHp, int defense, int strength, int intelligence, int mana  ,int experiencePoints, String...resistances){
+
+
+    public Fiend(String monsterTitle, int monsterHp, int defense, int strength, int agility, int intelligence, int mana  , int experiencePoints, int proficiency, String...resistances){
         this.monsterTitle = monsterTitle;
         this.monsterHp = monsterHp;
         this.defense = defense;
@@ -70,7 +80,80 @@ class Fiend {
         this.strength = strength;
         this.intelligence = intelligence;
         this.mana = mana;
+        this.proficiency = proficiency;
         this.experiencePoints = experiencePoints;
         this.resistances=new ArrayList<>(Arrays.asList(resistances));
     }
+
+    public int initiative(){
+        int min = 1;
+        int max = 20;
+        int range = max - min + 1;
+
+
+        int d20 = (int) ((Math.random() * range) + min);
+
+        int initiative = d20 + agility;
+        return initiative;
+    }
+
+    public boolean fiendAttack(Fighter fighter){
+
+        int min = 1;
+        int max = 20;
+        int range = max - min + 1;
+
+
+        int d20 = (int) ((Math.random() * range) + min);
+
+
+        if (d20==20) {
+            System.out.println("Crit Hit!");
+        }
+
+        if (d20 == 1){
+            System.out.println("Crit failure!");
+        }
+
+
+
+        attack = proficiency + strength;
+//        System.out.println("attack mod: " +attack);
+
+        int attackRoll = attack + d20;
+        System.out.println("Monster attack roll: " + attackRoll + " (Roll: " + d20 + " Modifier: " + attack + ")");
+
+        if (attackRoll >= fighter.getDefense()){
+            return true;
+        }
+        else return false;
+
+    }
+
+    int fiendBite(Fighter fighter, Fiend fiend){
+        if (fiend.fiendAttack(fighter) == false){
+            System.out.println("Monster attack missed!");
+            System.out.println(fighter.getName()+ "hp: "+fighter.getPlayerHP());
+            return fighter.getPlayerHP();
+        }
+        System.out.println("Attack Hit! Roll for damage.");
+        int min = 1;
+        int max = 6;
+        int range = (max - min) +1;
+        int d6 = (int) (Math.random() * range) +min;
+        int twoD6 = d6 + d6;
+
+
+
+        int damage = d6 + fiend.getStrength();
+        System.out.println("Damage amount: " + damage + " Dice roll: " + d6 +
+                " damage modifier: " + fiend.getStrength());
+
+        fighter.harm(fighter, damage);
+        if (fighter.getPlayerHP()<0){
+            fighter.setPlayerHP(0);
+        }
+        System.out.println("player's new health: " + fighter.getPlayerHP());
+        return fighter.getPlayerHP();
+    };
 }
