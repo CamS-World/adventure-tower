@@ -6,11 +6,12 @@ public abstract class FighterMoves {
 
     int slashAttack(Fighter fighter, Fiend fiend){
         if (fighter.attack(fiend) == false){
-            System.out.println("Attack missed!");
+            System.out.println(fighter.getName()+ "'s Attack missed!");
+            System.out.println();
             System.out.println("Monster HP: "+ fiend.getMonsterHp());
             return fiend.getMonsterHp();
         }
-        System.out.println("Attack Hit! Roll for damage.");
+        System.out.println(fighter.getName()+"'s Attack Hit! Roll for damage.");
         int min = 1;
         int max = 8;
         int range = (max - min) +1;
@@ -19,12 +20,14 @@ public abstract class FighterMoves {
 
 
         int damage = d8 + fighter.getStrength();
-        System.out.println("Damage amount: " + damage + " Dice roll: " + d8 + " damage modifier: " + fighter.getStrength());
+        System.out.println();
+        System.out.println("Damage amount: " + damage + "\n Dice roll: " + d8 + " damage modifier: " + fighter.getStrength());
 
         fiend.setMonsterHp(fiend.getMonsterHp() - damage);
         if (fiend.getMonsterHp()<0){
             fiend.setMonsterHp(0);
         }
+        System.out.println();
         System.out.println("monster's new health: " + fiend.getMonsterHp());
         return fiend.getMonsterHp();
     };
@@ -49,9 +52,9 @@ public abstract class FighterMoves {
         if (strengthSave < difficultyScore){
             System.out.println("Monster save: "+strengthSave);
             System.out.println("DC: "+difficultyScore);
-            System.out.println("fiend initial health: " +fiend.getMonsterHp());
+            System.out.println("\nfiend initial health: " +fiend.getMonsterHp());
             fiend.setMonsterHp(fiend.getMonsterHp() - twoD6);
-            System.out.println("2d6: " +twoD6);
+            System.out.println("\n2d6: " +twoD6);
             if (fiend.getMonsterHp()<0){
                 fiend.setMonsterHp(0);
             }
@@ -61,10 +64,10 @@ public abstract class FighterMoves {
     //Success scenario
         if(strengthSave >= difficultyScore ) {
             System.out.println("fiend initial health: " +fiend.getMonsterHp());
-            System.out.println("2d6: " +twoD6);
+            System.out.println("\n2d6: " +twoD6);
             fiend.setMonsterHp(fiend.getMonsterHp() - (twoD6 / 2));
-            System.out.println("save: " + strengthSave);
-            System.out.println("DC: " + difficultyScore);
+            System.out.println("\nsave: " + strengthSave);
+            System.out.println("\nDC: " + difficultyScore);
 
             if (fiend.getMonsterHp()<0){
                 fiend.setMonsterHp(0);

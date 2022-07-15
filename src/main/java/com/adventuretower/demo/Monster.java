@@ -94,6 +94,7 @@ class Fiend {
         int d20 = (int) ((Math.random() * range) + min);
 
         int initiative = d20 + agility;
+        System.out.println("Monster iniative: "+initiative);
         return initiative;
     }
 
@@ -112,7 +113,7 @@ class Fiend {
         }
 
         if (d20 == 1){
-            System.out.println("Crit failure!");
+            System.out.println("\nCrit failure!");
         }
 
 
@@ -121,7 +122,8 @@ class Fiend {
 //        System.out.println("attack mod: " +attack);
 
         int attackRoll = attack + d20;
-        System.out.println("Monster attack roll: " + attackRoll + " (Roll: " + d20 + " Modifier: " + attack + ")");
+        System.out.println();
+        System.out.println("Monster attack roll: " + attackRoll + " \n(Roll: " + d20 + " Modifier: " + attack + ")");
 
         if (attackRoll >= fighter.getDefense()){
             return true;
@@ -133,7 +135,7 @@ class Fiend {
     int fiendBite(Fighter fighter, Fiend fiend){
         if (fiend.fiendAttack(fighter) == false){
             System.out.println("Monster attack missed!");
-            System.out.println(fighter.getName()+ "hp: "+fighter.getPlayerHP());
+            System.out.println("\n"+fighter.getName()+ "hp: "+fighter.getPlayerHP());
             return fighter.getPlayerHP();
         }
         System.out.println("Attack Hit! Roll for damage.");
@@ -146,14 +148,14 @@ class Fiend {
 
 
         int damage = d6 + fiend.getStrength();
-        System.out.println("Damage amount: " + damage + " Dice roll: " + d6 +
+        System.out.println("\nDamage amount: " + damage + " Dice roll: " + d6 +
                 " damage modifier: " + fiend.getStrength());
 
         fighter.harm(fighter, damage);
         if (fighter.getPlayerHP()<0){
             fighter.setPlayerHP(0);
         }
-        System.out.println("player's new health: " + fighter.getPlayerHP());
+        System.out.println("\nplayer's new health: " + fighter.getPlayerHP());
         return fighter.getPlayerHP();
     };
 }

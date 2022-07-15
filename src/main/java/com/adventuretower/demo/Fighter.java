@@ -13,6 +13,7 @@ public class Fighter extends FighterMoves {
     private int attack;
     private int defense;
     private int level;
+    private int experiencePool;
     private int proficiency;
 
 
@@ -65,7 +66,7 @@ public class Fighter extends FighterMoves {
         this.playerHP = playerHP;
     }
 
-    public Fighter(String name, int playerHP, int strength, int agility, int intelligence, int mana, int defense, int level, int proficiency){
+    public Fighter(String name, int playerHP, int strength, int agility, int intelligence, int mana, int defense, int level, int experiencePool, int proficiency){
         this.name = name;
         this.playerHP = playerHP;
         this.strength = strength;
@@ -75,6 +76,7 @@ public class Fighter extends FighterMoves {
         this.attack = strength + proficiency;
         this.defense = defense;
         this.level = level;
+        this.experiencePool = experiencePool;
         this.proficiency = proficiency;
     }
 
@@ -94,6 +96,7 @@ public class Fighter extends FighterMoves {
         int d20 = (int) ((Math.random() * range) + min);
 
         int initiative = d20 + agility;
+        System.out.println("Player initiative: " +initiative);
         return initiative;
     }
 
@@ -121,7 +124,7 @@ public class Fighter extends FighterMoves {
 //        System.out.println("attack mod: " +attack);
 
         int attackRoll = attack + d20;
-        System.out.println("Total attack roll: " + attackRoll + " (Roll: " + d20 + " Modifier: " + attack + ")");
+        System.out.println("Total attack roll: " + attackRoll + "\n (Roll: " + d20 + " Modifier: " + attack + ")\n");
 
         if (attackRoll > fiend.getDefense()){
             return true;
@@ -139,4 +142,13 @@ public class Fighter extends FighterMoves {
     public void harm(Fighter fighter, int damageDone){
     playerHP -= damageDone;
     }
+
+    public void levelUp(int experiencePoints) {
+    experiencePool += experiencePoints;
+    if (experiencePool > 140 && level == 3) {
+        level += 1;
+    }
+    }
 }
+
+
