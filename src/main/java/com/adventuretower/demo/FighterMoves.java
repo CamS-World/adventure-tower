@@ -5,7 +5,7 @@ import java.util.Random;
 public abstract class FighterMoves {
 
     int slashAttack(Fighter fighter, Fiend fiend){
-        if (fighter.attack(fiend) == false){
+        if (fighter.attack(fiend, fighter) == false){
             System.out.println(fighter.getName()+ "'s Attack missed!");
             System.out.println();
             System.out.println("Monster HP: "+ fiend.getMonsterHp());
