@@ -78,6 +78,7 @@ class Fiend {
         this.defense = defense;
         this.attack = attack;
         this.strength = strength;
+        this.agility = agility;
         this.intelligence = intelligence;
         this.mana = mana;
         this.proficiency = proficiency;

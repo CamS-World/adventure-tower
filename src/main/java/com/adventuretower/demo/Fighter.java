@@ -4,6 +4,14 @@ import java.util.Random;
 
 public class Fighter extends FighterMoves {
 
+    int min = 1;
+    int max = 20;
+    int range = max - min + 1;
+
+
+    int d20 = (int) ((Math.random() * range) + min);
+
+
     private String name;
     private int playerHP;
     private int strength;
@@ -18,7 +26,9 @@ public class Fighter extends FighterMoves {
 
 
     // Getters
-    public String getName(){return name;}
+    public String getName() {
+        return name;
+    }
 
     public int getPlayerHP() {
         return playerHP;
@@ -56,7 +66,6 @@ public class Fighter extends FighterMoves {
     }
 
 
-
     public int getProficiency() {
         return proficiency;
     }
@@ -66,7 +75,7 @@ public class Fighter extends FighterMoves {
         this.playerHP = playerHP;
     }
 
-    public Fighter(String name, int playerHP, int strength, int agility, int intelligence, int mana, int defense, int level, int experiencePool, int proficiency){
+    public Fighter(String name, int playerHP, int strength, int agility, int intelligence, int mana, int defense, int level, int experiencePool, int proficiency) {
         this.name = name;
         this.playerHP = playerHP;
         this.strength = strength;
@@ -81,13 +90,15 @@ public class Fighter extends FighterMoves {
     }
 
 
-        public Fighter(){
+    public Fighter() {
 
-    };
+    }
+
+    ;
 
     //Player methods
 
-    public int initiative(){
+    public int initiative() {
         int min = 1;
         int max = 20;
         int range = max - min + 1;
@@ -96,28 +107,29 @@ public class Fighter extends FighterMoves {
         int d20 = (int) ((Math.random() * range) + min);
 
         int initiative = d20 + agility;
-        System.out.println("Player initiative: " +initiative);
+        System.out.println("Player initiative: " + initiative);
         return initiative;
     }
 
-    public boolean attack(Fiend fiend){
+    public boolean isCritHit() {
+        return (d20 == 20) ? true : false;
+    }
+
+    public boolean attack(Fiend fiend, Fighter fighter) {
 
         int min = 1;
         int max = 20;
         int range = max - min + 1;
-
-
         int d20 = (int) ((Math.random() * range) + min);
 
-
-        if (d20==20) {
+        if (d20 == 20) {
             System.out.println("Crit Hit!");
+            fighter.isCritHit();
         }
 
-        if (d20 == 1){
+        if (d20 == 1) {
             System.out.println("Crit failure!");
         }
-
 
 
         attack = proficiency + strength;
@@ -126,28 +138,27 @@ public class Fighter extends FighterMoves {
         int attackRoll = attack + d20;
         System.out.println("Total attack roll: " + attackRoll + "\n (Roll: " + d20 + " Modifier: " + attack + ")\n");
 
-        if (attackRoll > fiend.getDefense()){
-            return true;
-        }
-        else return false;
+
+        return (attackRoll > fiend.getDefense()) ? true : false;
 
     }
 
 
-    public void heal(){
+    public void heal() {
 
     }
 
 
-    public void harm(Fighter fighter, int damageDone){
-    playerHP -= damageDone;
+    public void harm(Fighter fighter, int damageDone) {
+        playerHP -= damageDone;
     }
 
     public void levelUp(int experiencePoints) {
-    experiencePool += experiencePoints;
-    if (experiencePool > 140 && level == 3) {
-        level += 1;
-    }
+        experiencePool += experiencePoints;
+//        if (experiencePool > 140 && level == 3) {
+//            level += 1;
+//        }
+
     }
 }
 
